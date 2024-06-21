@@ -1,30 +1,28 @@
 <script lang="ts">
-  import { stack } from "./stack.svelte";
+  import { filterStore } from "./filter-store.svelte";
+  import { filteredItems } from "./item-store.svelte";
 
-  // Works fine if its local to the file
-  // function create() {
-  //   let stack = $state<number[]>([]);
+  // import { itemStore } from "./item-store.svelte";
+  // Works here but not in another store
+  // const filteredItems = $derived.by(() => {
+  //   const { filter } = filterStore;
+  //   const { items } = itemStore;
 
-  //   return {
-  //     get isOpen() {
-  //       return stack.length > 0;
-  //     },
-  //     open: () => {
-  //       stack.push(stack.length);
-  //     },
-  //     close: () => {
-  //       stack.pop();
-  //     },
-  //     closeAll: () => {
-  //       stack = [];
-  //     },
-  //   };
-  // }
-
-  // const stack = create();
+  //   if (filter.length === 0) {
+  //     return items;
+  //   }
+  //   return items.filter((item) =>
+  //     item.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
+  //   );
+  // });
 </script>
 
-<div>{stack.isOpen}</div>
+<input type="search" bind:value={filterStore.filter} />
 
-<button onclick={stack.open}>Open</button>
-<button onclick={stack.closeAll}>Close</button>
+<p>Filter: {filterStore.filter}</p>
+
+<section>
+  {#each filteredItems as item}
+    <div>{item}</div>
+  {/each}
+</section>
