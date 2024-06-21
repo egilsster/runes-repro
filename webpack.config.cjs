@@ -25,6 +25,11 @@ module.exports = ({ mode = "production" }) => {
           type: "asset/source",
         },
         {
+          test: /\.svelte\.ts$/,
+          exclude: /node_modules/,
+          use: [{ loader: "swc-loader" }, { loader: "svelte-loader" }],
+        },
+        {
           test: /\.(js|ts)x?$/,
           exclude: /node_modules/,
           use: [{ loader: "swc-loader" }],
@@ -36,7 +41,7 @@ module.exports = ({ mode = "production" }) => {
           },
         },
         {
-          test: /\.(html|svelte)$/,
+          test: /\.(html|svelte|svelte\.js)$/,
           use: "svelte-loader",
         },
       ],
