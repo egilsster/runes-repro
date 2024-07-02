@@ -1,12 +1,14 @@
+import { localStore } from "./localStore.svelte";
+
 function createFilter() {
-  let filter = $state("");
+  let filter = localStore("repro-test-filter", "");
 
   return {
     get filter() {
-      return filter.toLocaleLowerCase();
+      return filter.value.toLocaleLowerCase();
     },
     set filter(newFilter: string) {
-      filter = newFilter;
+      filter.value = newFilter;
     },
   };
 }

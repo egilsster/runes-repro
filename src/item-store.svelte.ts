@@ -1,4 +1,5 @@
 import { filterStore } from "./filter-store.svelte";
+import { localStore } from "./localStore.svelte";
 
 const initialState = [
   "ONE",
